@@ -42,6 +42,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
       cb(parsed);
     }
   })
+  console.log("Image download completed!")
 }
 // ^this parses the values of the array of objects you get form the get request and turns
 // them into js objects
@@ -49,7 +50,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 function ParsedURL(parsedInput){
   parsedInput.forEach(function (item) {
-  filePath = "avatar-images/" + item.login + ".jpg";
+  filePath = "avatars/" + item.login + ".png";
   url = item.avatar_url;
   downloadImageByURL(url, filePath);
   })
