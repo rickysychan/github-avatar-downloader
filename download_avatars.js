@@ -1,10 +1,12 @@
 const request = require('request');
-// const fs = require('fs');
+const fs = require('fs');
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 
 var GITHUB_USER = "rizelmine17";
 var GITHUB_TOKEN = "4b4f3706087ba2d1f907b57dba3662257548f948";
+var urlArray = []
+
 
 function getRepoContributors(repoOwner, repoName, cb) {
 
@@ -28,10 +30,19 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 }
 
-function displayBody(parsedInput){
+function ParsedURL(parsedInput){
   parsedInput.forEach(function (item) {
-    console.log(item.avatar_url)
+  urlArray.push(item.avatar_url)
   })
+
 }
 
-getRepoContributors("jquery", "jquery", displayBody)
+function downloadImageByURL(url, filePath) {
+  request.get(url)
+         .pipe(fs.createWriteStream(filePath));
+}
+
+downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./avatar-images/picture.jpg")
+
+getRepoContributors("jquery", "jquery", ParsedURL)
+
