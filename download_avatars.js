@@ -13,6 +13,12 @@ const repoName = process.argv[3]
 
 function getRepoContributors(repoOwner, repoName, cb) {
 
+  if(repoOwner == null || repoName == null){
+    console.log("error: no arguments recieved");
+    return;
+  }
+
+
   var requestURL = 'https://'+ GITHUB_USER + ':' + GITHUB_TOKEN +
                    '@api.github.com/repos/' + repoOwner + '/' +
                     repoName + '/contributors';
