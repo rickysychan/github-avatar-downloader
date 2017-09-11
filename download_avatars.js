@@ -8,6 +8,8 @@ var GITHUB_TOKEN = "4b4f3706087ba2d1f907b57dba3662257548f948";
 
 let filePath = ''
 let url = ''
+const repoOwner = process.argv[2]
+const repoName = process.argv[3]
 
 function getRepoContributors(repoOwner, repoName, cb) {
 
@@ -34,9 +36,10 @@ function getRepoContributors(repoOwner, repoName, cb) {
       cb(parsed);
     }
   })
+}
 // ^this parses the values of the array of objects you get form the get request and turns
 // them into js objects
-}
+
 
 function ParsedURL(parsedInput){
   parsedInput.forEach(function (item) {
@@ -58,5 +61,5 @@ function downloadImageByURL(url, filePath) {
 // this function makes a get request based on the url and downloads the file into the file
 //path passed in
 
-getRepoContributors("jquery", "jquery", ParsedURL)
+getRepoContributors(repoOwner, repoName, ParsedURL)
 
